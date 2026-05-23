@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda | Karla & Axel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Overlay de Bienvenida -->
+    <div id="welcome-overlay" class="welcome-overlay">
+        <div class="welcome-content">
+            <p class="welcome-subtitle">ESTÁS INVITADO A LA BODA DE</p>
+            <h1 class="welcome-names">Karla & Axel</h1>
+            <button onclick="enterInvitation()" class="enter-button">ENTRAR</button>
+        </div>
+    </div>
+
+    <main id="main-content" class="main-content hidden">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <p class="hero-subtitle">NUESTRA BODA</p>
+                <h1 class="hero-title">Karla & Axel</h1>
+                <div class="hero-divider"></div>
+                <img src="pngegg.png" alt="divisor floral" class="section-divider">
+                
+                <!-- Cuenta Regresiva -->
+                <div class="countdown-container">
+                    <p class="countdown-label">FALTAN SOLO</p>
+                    <div class="countdown-timer">
+                        <div class="countdown-item">
+                            <span id="days" class="countdown-number">00</span>
+                            <span class="countdown-unit">Días</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="hours" class="countdown-number">00</span>
+                            <span class="countdown-unit">Horas</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="minutes" class="countdown-number">00</span>
+                            <span class="countdown-unit">Min</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="seconds" class="countdown-number">00</span>
+                            <span class="countdown-unit">Seg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fecha y Hora -->
+                <div class="event-details">
+                    <div class="details-divider"></div>
+                    <p class="event-date">Sábado, 25 de Julio del 2026</p>
+                    <p class="event-time">5:00 PM</p>
+                    <div class="details-divider"></div>
+                </div>
+
+                <!-- Segunda División Floral -->
+                <img src="flores2.png" alt="divisor floral 2" class="section-divider-small">
+
+                <!-- Dirección del Evento -->
+                <div class="location-details">
+                    <p class="location-label">LUGAR DEL EVENTO</p>
+                    <h2 class="location-name">Salón JAC</h2>
+                    <p class="location-address">
+                        Calle Madrid 136, Colonia 3 de agosto<br>
+                        C.P. 58128
+                    </p>
+                </div>
+
+                <!-- División Vestimenta -->
+                <img src="pngegg.png" alt="divisor floral 3" class="section-divider-small" style="transform: rotate(180deg); margin-top: 2rem;">
+
+                <!-- Vestimenta -->
+                <div class="info-section">
+                    <p class="info-label">CÓDIGO DE VESTIMENTA</p>
+                    <h3 class="info-title">Formal</h3>
+                    <p class="info-text">Su presencia es nuestro mejor regalo,<br>les agradeceremos asistir con vestimenta formal.</p>
+                </div>
+
+                <!-- División Regalos -->
+                <img src="flores2.png" alt="divisor floral 4" class="section-divider-small" style="margin-top: 2rem;">
+
+                <!-- Mesa de Regalos -->
+                <div class="info-section">
+                    <p class="info-label">MESA DE REGALOS</p>
+                    <h3 class="info-title">Lluvia de Sobres</h3>
+                    <p class="info-text">
+                        Nuestro mejor regalo es tu presencia,<br>
+                        pero si deseas tener un detalle con nosotros,<br>
+                        contaremos con lluvia de sobres el día del evento.
+                    </p>
+                </div>
+
+                <!-- División RSVP -->
+                <div class="details-divider" style="margin: 4rem auto 2rem;"></div>
+
+                <!-- Confirmación RSVP -->
+                <div class="rsvp-section">
+                    <h3 class="rsvp-title">Confirmar Asistencia</h3>
+                    <p class="rsvp-text">Agradecemos confirmar antes del 10 de julio</p>
+                    <a href="https://wa.me/524438582984?text=Hola%20confirmo%20asistencia%20a%20la%20boda%20de%20Karla%20y%20Axel" 
+                       target="_blank" 
+                       class="whatsapp-button">
+                       CONFIRMAR POR WHATSAPP
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Elementos Botánicos (Decoración) -->
+            <div class="botanical-corner top-left"></div>
+            <div class="botanical-corner bottom-right"></div>
+        </section>
+    </main>
+
+    <script>
+        function enterInvitation() {
+            const overlay = document.getElementById('welcome-overlay');
+            const mainContent = document.getElementById('main-content');
+            
+            overlay.classList.add('fade-out');
+            mainContent.classList.remove('hidden');
+            mainContent.classList.add('fade-in');
+            
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 1000);
+        }
+
+        // Fecha objetivo: 25 de julio de 2026 a las 17:00 hrs
+        const targetDate = new Date('July 25, 2026 17:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (document.getElementById('days')) {
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            }
+
+            if (distance < 0) {
+                clearInterval(interval);
+                document.querySelector('.countdown-container').innerHTML = "<p class='countdown-label'>¡HOY ES EL GRAN DÍA!</p>";
+            }
+        }
+
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
