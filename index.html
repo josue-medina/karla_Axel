@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Elemento de Audio -->
+    <audio id="bg-music" loop>
+        <source src="final.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Control de Música -->
+    <button id="music-control" class="music-control hidden" onclick="toggleMusic()">
+        <span id="music-icon">🔊</span>
+    </button>
+
     <!-- Overlay de Bienvenida -->
     <div id="welcome-overlay" class="welcome-overlay">
         <div class="welcome-content">
@@ -129,6 +139,11 @@
     </main>
 
     <script>
+        const music = document.getElementById('bg-music');
+        const musicControl = document.getElementById('music-control');
+        const musicIcon = document.getElementById('music-icon');
+        let isMuted = false;
+
         function enterInvitation() {
             const overlay = document.getElementById('welcome-overlay');
             const mainContent = document.getElementById('main-content');
@@ -137,9 +152,27 @@
             mainContent.classList.remove('hidden');
             mainContent.classList.add('fade-in');
             
+            // Iniciar música
+            music.play().catch(error => {
+                console.log("Autoplay prevenido. Interacción requerida.");
+            });
+            musicControl.classList.remove('hidden');
+            
             setTimeout(() => {
                 overlay.style.display = 'none';
             }, 1000);
+        }
+
+        function toggleMusic() {
+            if (isMuted) {
+                music.muted = false;
+                musicIcon.innerText = '🔊';
+                isMuted = false;
+            } else {
+                music.muted = true;
+                musicIcon.innerText = '🔇';
+                isMuted = true;
+            }
         }
 
         // Fecha objetivo: 25 de julio de 2026 a las 17:00 hrs
@@ -163,7 +196,10 @@
 
             if (distance < 0) {
                 clearInterval(interval);
-                document.querySelector('.countdown-container').innerHTML = "<p class='countdown-label'>¡HOY ES EL GRAN DÍA!</p>";
+                const container = document.querySelector('.countdown-container');
+                if (container) {
+                    container.innerHTML = "<p class='countdown-label'>¡HOY ES EL GRAN DÍA!</p>";
+                }
             }
         }
 
